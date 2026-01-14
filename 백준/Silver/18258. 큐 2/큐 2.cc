@@ -1,50 +1,68 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MX = 2000005;
+int dat[MX];
+int head = 0, tail = 0;
+
+void push(int x){
+    dat[tail] = x;
+    tail++;
+}
+
+void pop(){
+    head++;
+}
+
+int front(){
+    return dat[head];
+}
+
+int back(){
+    return dat[tail-1];
+}
+
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
-
-    int n;
+    int n,k;
     string s;
-
     cin >> n;
-    queue<int> Q;
     for(int i = 0; i < n; i++){
         cin >> s;
         if(s == "push"){
-            int k;
             cin >> k;
-            Q.push(k);
+            push(k);
         }else if(s == "pop"){
-            if(Q.empty()){
+            if(head == tail){
                 cout << -1 << '\n';
             }else{
-                cout << Q.front() << '\n';
-                Q.pop();
+                cout << front() << '\n';
+                pop();
             }
         }else if(s == "size"){
-            cout << Q.size() << '\n';
+            cout << tail - head << '\n';
         }else if(s == "empty"){
-            if(Q.empty()){
+            if(head == tail){
                 cout << 1 << '\n';
             }else{
                 cout << 0 << '\n';
             }
         }else if(s == "front"){
-            if(Q.empty()){
-                cout << -1 << '\n';
+            if(head == tail){
+                cout << -1 << "\n";
             }else{
-                cout << Q.front() << '\n';
+                cout << front() << '\n';
             }
         }else{
-            if(Q.empty()){
+            if(head == tail){
                 cout << -1 << '\n';
             }else{
-                cout << Q.back() << '\n';
+                cout << back() << '\n';
             }
         }
     }
+
 
     return 0;
 }
